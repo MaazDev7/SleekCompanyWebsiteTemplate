@@ -65,7 +65,7 @@ Follow these instructions to set up and customize the template for your own use.
 - Customize the section headings, paragraphs, contact details and social links to suit your needs.
 
 ## 📄 License
-This project is licensed under the MIT License.
+This project is licensed under the GPL-3 License.
 
 ## ✉️ Contact
 For any inquiries or support, please contact us via maazkhan75555@gmail.com
