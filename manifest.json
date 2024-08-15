@@ -1,0 +1,31 @@
+{
+	"name": "companyName",
+	"short_name": "companyName",
+	"icons": [
+	  {
+		"src": "assets/img/app-icon-192x192.png",
+		"type": "image/png",
+		"sizes": "192x192"
+	  },
+	  {
+		"src": "assets/img/app-icon-256x256.png",
+		"type": "image/png",
+		"sizes": "256x256"
+	  },
+	  {
+		"src": "assets/img/app-icon-384x384.png",
+		"type": "image/png",
+		"sizes": "384x384"
+	  },
+	  {
+		"src": "assets/img/app-icon-512x512.png",
+		"type": "image/png",
+		"sizes": "512x512"
+	  }
+	],
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#000000",
+	"theme_color": "#000000"
+  }
+  
