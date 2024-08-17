@@ -60,12 +60,83 @@ Follow these instructions to set up and customize the template for your own use.
 **3. Edit manifest.json file**
 - change the company name in the manifest.json file for adding shortcut to homescreen in android devices, also for apple add to home screen replace the apple-touch-icon.png image in the img folder with you own alphabet or logo image
 
-### 🌐 Live Preview
-- Open the index.html file and replace the placeholder text with your company’s details.
-- Customize the section headings, paragraphs, contact details and social links to suit your needs.
+## 📧 Setting Up the Contact Form API
+
+Follow these steps to set up the Google Sheets API for the contact form:
+
+### 1. Create a Google Sheet
+- Create a new Google Sheet and name it **"Contact Form"** (or any other name you prefer).
+
+### 2. Access Google Apps Script
+- Go to the **Extensions** tab in your Google Sheet.
+- Click on **Apps Script** to open the script editor.
+- Name the script **"Contact Form"**.
+
+### 3. Add the Script
+- Paste the following code into the script editor. This code is adapted from the repository [form-to-google-sheets](https://github.com/jamiewilson/form-to-google-sheets):
+
+  ```javascript
+  var sheetName = 'Sheet1'
+  var scriptProp = PropertiesService.getScriptProperties()
+
+  function intialSetup () {
+    var activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
+    scriptProp.setProperty('key', activeSpreadsheet.getId())
+  }
+
+  function doPost (e) {
+    var lock = LockService.getScriptLock()
+    lock.tryLock(10000)
+
+    try {
+      var doc = SpreadsheetApp.openById(scriptProp.getProperty('key'))
+      var sheet = doc.getSheetByName(sheetName)
+
+      var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
+      var nextRow = sheet.getLastRow() + 1
+
+      var newRow = headers.map(function(header) {
+        return header === 'timestamp' ? new Date() : e.parameter[header]
+      })
+
+      sheet.getRange(nextRow, 1, 1, newRow.length).setValues([newRow])
+
+      return ContentService
+        .createTextOutput(JSON.stringify({ 'result': 'success', 'row': nextRow }))
+        .setMimeType(ContentService.MimeType.JSON)
+    }
+
+    catch (e) {
+      return ContentService
+        .createTextOutput(JSON.stringify({ 'result': 'error', 'error': e }))
+        .setMimeType(ContentService.MimeType.JSON)
+    }
+
+    finally {
+      lock.releaseLock()
+    }
+  }
+  ```
+### 4. Run the Script
+- Run the script for the first time by selecting the intialSetup function.
+- You will be prompted to authorize the script to access your Google account. Complete the authorization process.
+
+### 5. Deploy as a Web App
+- After the script runs successfully, click on Deployment > New deployment.
+- Choose the type as Web app.
+- Configure the deployment settings, ensuring that:
+  - Execute as: Me
+  - Who has access: Anyone
+- Deploy the web app.
+
+### 6. Use the Web App URL
+- After deployment is complete, you will receive a link to the web app.
+- Copy this link and use it as the 'SCRIPT URL' in your contact form's JavaScript code to enable form submissions.
+
+Your contact form is now set up and ready to receive messages, which will be saved directly to your Google Sheet!
 
 ## 📄 License
-This project is licensed under the GPL-3 License.
+This project is licensed under the MIT License.
 
 ## ✉️ Contact
 For any inquiries or support, please contact us via maazkhan75555@gmail.com
