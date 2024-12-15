@@ -39,7 +39,7 @@ Follow these instructions to set up and customize the template for your own use.
 
 1. Clone this repository to your local machine:
    ```bash
-   git clone https://github.com/maazkhan75/SleekCompanyWebsiteTemplate.git
+   git clone https://github.com/maazkhandev75/SleekCompanyWebsiteTemplate.git
    ```
 2. Open the project directory
    ```bash
