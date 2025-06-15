@@ -137,6 +137,3 @@ Your contact form is now set up and ready to receive messages, which will be sav
 
 ## 📄 License
 This project is licensed under the MIT License.
-
-## ✉️ Contact
-For any inquiries or support, please contact us via maazkhan75555@gmail.com
